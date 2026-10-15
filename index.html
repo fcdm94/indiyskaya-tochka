@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Индийская Точка — Быстрая индийская кухня</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --saffron: #E67E22;
+      --gold: #F1C40F;
+      --terracotta: #C0392B;
+      --deep-orange: #D35400;
+      --dark-bg: #121212;
+      --card-bg: #1E1E1E;
+      --text-light: #FFF9F2;
+      --text-muted: #A0A0A0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-light);
+      padding-bottom: 70px;
+    }
+
+    /* Шапка */
+    header {
+      background: linear-gradient(135deg, var(--terracotta), var(--deep-orange));
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    .brand-title {
+      font-size: 26px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold);
+      text-shadow: 1px 2px 4px rgba(0,0,0,0.6);
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      margin-top: 4px;
+      opacity: 0.95;
+    }
+
+    /* Баннер истории / О нас */
+    .hero-banner {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), 
+                  url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=800&q=80') center/cover;
+      padding: 28px 16px;
+      text-align: center;
+      border-bottom: 3px solid var(--saffron);
+    }
+
+    .hero-banner h1 {
+      font-size: 20px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .hero-banner p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-light);
+    }
+
+    /* Быстрые факты */
+    .info-bar {
+      display: flex;
+      justify-content: space-around;
+      background-color: var(--card-bg);
+      padding: 12px;
+      margin: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(241, 196, 15, 0.2);
+    }
+
+    .info-item {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .info-item span {
+      display: block;
+      color: var(--gold);
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    /* Переключатель категорий */
+    .categories-wrapper {
+      position: sticky;
+      top: 0;
+      background-color: var(--dark-bg);
+      z-index: 100;
+      padding: 10px 16px;
+      border-bottom: 1px solid #2A2A2A;
+    }
+
+    .categories {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-btn {
+      background-color: var(--card-bg);
+      color: var(--text-light);
+      border: 1px solid #333;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .cat-btn.active {
+      background-color: var(--saffron);
+      color: #FFF;
+      border-color: var(--saffron);
+    }
+
+    /* Заголовки секций */
+    .section-title {
+      font-size: 18px;
+      color: var(--gold);
+      margin: 20px 16px 12px;
+      font-weight: 700;
+    }
+
+    /* Карточки блюд */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+      padding: 0 16px;
+    }
+
+    .food-card {
+      background-color: var(--card-bg);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #2C2C2C;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .food-info {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .food-title {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 4px;
+      color: var(--text-light);
+    }
+
+    .food-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      flex-grow: 1;
+      line-height: 1.3;
+    }
+
+    .food-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .food-price {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .food-weight {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* Секция О нас */
+    .about-section {
+      background-color: var(--card-bg);
+      margin: 24px 16px;
+      padding: 18px;
+      border-radius: 14px;
+      border-left: 4px solid var(--saffron);
+    }
+
+    .about-section h2 {
+      color: var(--gold);
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .about-section p {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #DDD;
+    }
+
+    /* Секция Контакты */
+    .contacts-section {
+      margin: 24px 16px;
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .contacts-section h2 {
+      color: var(--gold);
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .btn-call {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--saffron), var(--deep-orange));
+      color: #FFF;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 25px;
+      margin-top: 10px;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(230, 126, 34, 0.4);
+    }
+
+    /* Нижняя навигация */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #181818;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid #2A2A2A;
+      z-index: 1000;
+    }
+
+    .nav-item {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .nav-item.active {
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header>
+    <div class="brand-title">Индийская Точка</div>
+    <div class="brand-subtitle">Аутентичная индийская кухня на фудкорте</div>
+  </header>
+
+  <!-- Герой / О нас кратко -->
+  <div class="hero-banner">
+    <h1>Яркие вкусы Индии за 5 минут</h1>
+    <p>Настоящий Баттер Чикен, пряный Чикен Тикка Масала, хрустящие нааны и освежающий Манго-Ласси!</p>
+  </div>
+
+  <!-- Быстрая инфо-панель -->
+  <div class="info-bar">
+    <div class="info-item">
+      <span>⏱ 5–10 мин</span>
+      Быстрая подача
+    </div>
+    <div class="info-item">
+      <span>🌶 Специи</span>
+      Из Индии
+    </div>
+    <div class="info-item">
+      <span>🌱 Вег-меню</span>
+      Большой выбор
+    </div>
+  </div>
+
+  <!-- Категории меню -->
+  <div class="categories-wrapper">
+    <div class="categories">
+      <button class="cat-btn active">🔥 Выбор гостей</button>
+      <button class="cat-btn">🍗 Горячее</button>
+      <button class="cat-btn">🌱 Вегетарианское</button>
+      <button class="cat-btn">🫓 Нааны & Соусы</button>
+      <button class="cat-btn">🥭 Напитки</button>
+      <button class="cat-btn">🍰 Десерты</button>
+    </div>
+  </div>
+
+  <!-- Популярные блюда -->
+  <div class="section-title">🔥 Выбор гостей</div>
+  <div class="menu-grid">
+
+    <div class="food-card">
+      <div class="food-info">
+        <div class="food-title">Баттер Чикен</div>
+        <div class="food-desc">Нежные кусочки курицы в томатно-сливочном соусе</div>
+        <div class="food-footer">
+          <div class="food-price">1 090 ₽</div>
+          <div class="food-weight">480 г</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card">
+      <div class="food-info">
+        <div class="food-title">Чикен Тикка Масала</div>
+        <div class="food-desc">Сочная курица в пряном соусе масала со специями</div>
+        <div class="food-footer">
+          <div class="food-price">1 090 ₽</div>
+          <div class="food-weight">480 г</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card">
+      <div class="food-info">
+        <div class="food-title">Индийская шаурма (Катти-ролл)</div>
+        <div class="food-desc">Пряная курица со свежими овощами в лепешке</div>
+        <div class="food-footer">
+          <div class="food-price">590 ₽</div>
+          <div class="food-weight">250 г</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card">
+      <div class="food-info">
+        <div class="food-title">Большой куриный сет Кинг-размер</div>
+        <div class="food-desc">Набор горячих блюд с рисом, лепешками и соусами</div>
+        <div class="food-footer">
+          <div class="food-price">2 490 ₽</div>
+          <div class="food-weight">1.44 кг</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Напитки & Десерты -->
+  <div class="section-title">🥭 Напитки и Десерты</div>
+  <div class="menu-grid">
+
+    <div class="food-card">
+      <div class="food-info">
+        <div class="food-title">Манго-ласси</div>
+        <div class="food-desc">Традиционный йогуртовый напиток с мякотью манго</div>
+        <div class="food-footer">
+          <div class="food-price">350 ₽</div>
+          <div class="food-weight">300 мл</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card">
+      <div class="food-info">
+        <div class="food-title">Лимонад Маракуйя</div>
+        <div class="food-desc">Освежающий напиток на основе натурального сока</div>
+        <div class="food-footer">
+          <div class="food-price">290 ₽</div>
+          <div class="food-weight">300 мл</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-card">
+      <div class="food-info">
+        <div class="food-title">Традиционная Халва</div>
+        <div class="food-desc">Десерт по аутентичному индийскому рецепту</div>
+        <div class="food-footer">
+          <div class="food-price">320 ₽</div>
+          <div class="food-weight">80 г</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- О нас -->
+  <div class="about-section" id="about">
+    <h2>О нашей точке</h2>
+    <p>«Индийская точка» — это понятный и быстрый формат индийского стритфуда. Мы привозим специи напрямую из Индии и готовим блюда так, чтобы вы получили горячий, ароматный обед или ужин за несколько минут прямо на фудкорте!</p>
+  </div>
+
+  <!-- Контакты -->
+  <div class="contacts-section" id="contacts">
+    <h2>Мы на фудкорте!</h2>
+    <p style="font-size: 12px; color: var(--text-muted);">Звоните для предзаказа или вопросов:</p>
+    <a href="tel:+79000000000" class="btn-call">📞 +7 (900) 000-00-00</a>
+  </div>
+
+  <!-- Нижняя навигация для смартфонов -->
+  <div class="bottom-nav">
+    <a href="#" class="nav-item active">📋 Меню</a>
+    <a href="#about" class="nav-item">ℹ️ О нас</a>
+    <a href="#contacts" class="nav-item">📞 Контакты</a>
+  </div>
+
+</body>
+</html>
